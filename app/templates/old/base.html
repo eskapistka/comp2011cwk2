@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- web app title if provided -->
+      {% if title %}
+      <title>{{ title }}</title>
+      {% else %}
+      <title>no title :(</title>
+      {% endif %}
+    <!-- my stylesheet -->
+    <link rel="stylesheet" href="static/style.css">
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#views" aria-controls="views" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-md-center" id="views">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <span class="nav-link">my assessment board</span>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/all">see all and add</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/done">done</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/todo">todo</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!--main code here-->
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-10 col-md-6 p-4">
+          {% block content %}{% endblock %}
+
+          <!-- display list of assessments same for every page, the only thing that changes is the filter on 'assessments' -->
+          {% for assessment in assessments %}
+          <div class="assessment-entry mt-5 mb-5 card container">
+            <div class="card-body row">
+              <div class="col-8 col-lg-10">
+               <ul>
+                <li id="assessment-entry-title">{{ assessment.title }}</li>
+                <li id="assessment-entry-code">{{ assessment.code }}</li>
+                <li id="assessment-entry-deadline">due {{ assessment.deadline.date() }}</li>
+                {% if assessment.description %}
+                  <div class="pt-3">
+                    <li>{{ assessment.description }}</li>
+                  </div>
+                {% endif %}
+              </ul>
+              </div>
+
+              <div class="col-4 col-lg-2">
+                <a class="btn btn-danger p-1 mb-2" href="{{ url_for('delete', id=assessment.id) }}">delete</a><br>
+                 <a class="btn btn-success p-1" href="{{ url_for('toggleState', id=assessment.id) }}">
+                   {% if assessment.complete %}
+                      <span>mark as to-do</span>
+                   {% else %}
+                      <span>mark as done</span>
+                   {% endif %}
+                 </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+body {
+    background: #e8e8e8;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 0;
+    font-size: 0.8rem;
+}
+.form-input {
+    width: 100%;
+}
+
+.form-input-desc {
+    height: 4rem;
+}
+
+input {
+    font-size: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    height: 1.5rem;
+}
+
+textarea {
+    font-size: 0.8rem;
+    border-radius: 8px;
+    border: none;
+}
+
+.assessment-entry {
+    border-radius: 12px;
+}
+
+.assessment-entry ul li {
+    list-style: none;
+}
+
+#assessment-entry-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+#assessment-entry-code {
+    font-size: 0.8rem;
+    color: #444444;
+}
+
+#assessment-entry-deadline {
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.btn {
+    border-radius: 12px;
+    font-size: 0.8rem;
+    width: 100%;
+}
+
+.card-body ul {
+    margin: 0px 10px;
+    padding: 0;
+}
